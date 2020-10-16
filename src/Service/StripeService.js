@@ -14,13 +14,14 @@ class StripeService {
     return customer;
   }
 
-  async createCharge(chargeData) {
-    const { amount, currency, customer, description } = chargeData;
+  async createCharge(chargeData, customer) {
+    const { amount, currency, description } = chargeData;
     await stripe.charges.create({
       amount,
       currency,
       customer: customer.id,
       description,
+      source,
     });
   }
 }
