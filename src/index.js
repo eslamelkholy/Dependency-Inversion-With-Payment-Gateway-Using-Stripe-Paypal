@@ -2,6 +2,7 @@ import express from "express";
 import Router from "./routes/index";
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("", Router);
 

@@ -957,7 +957,7 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.1.0.tgz#30fa40c9e7fe07dbc895678cd287024dea241dd9"
   integrity sha512-1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ==
 
-body-parser@1.19.0:
+body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
   integrity sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
@@ -2523,10 +2523,10 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-stripe@^8.96.0:
-  version "8.96.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.96.0.tgz#10c3f91406716dc7fdf1c92d54e1e8a4d205cc3f"
-  integrity sha512-9bfPq7UYt9+q1pLznyrqWKtyeN1OAdsTQ8X6rleZW0fUeT1jpOhQaEVxq0vnbeqncbiJ1i46JvZp0FUNrfKZ4g==
+stripe@^8.114.0:
+  version "8.114.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.114.0.tgz#cfdf6eb7faa1cfaa059cd8ee56d6ba5f9b152b7a"
+  integrity sha512-CaFK5aO2/gxR9kLLH7E0iL/DCPQAxTlYMYreofCqJ8AAzundZ6DdtVk0znlHpBVAEnq06SOxAQILdyDfRBr3vA==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
