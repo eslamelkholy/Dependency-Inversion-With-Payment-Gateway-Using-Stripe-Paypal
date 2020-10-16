@@ -14,11 +14,12 @@ export default (sequelize, DataTypes) => {
   payment.init(
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
+      chargeId: DataTypes.STRING,
       amount: DataTypes.INTEGER,
-      userId: DataTypes.UUID,
     },
     {
       sequelize,

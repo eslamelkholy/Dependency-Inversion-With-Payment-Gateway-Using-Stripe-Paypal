@@ -1,4 +1,5 @@
 import express from "express";
+import "./models";
 import Router from "./routes/index";
 import bodyParser from "body-parser";
 
