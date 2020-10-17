@@ -1,5 +1,5 @@
-((configRepo) => {
-  configRepo.SetConfig = (paypal) => {
+class PayPalConfig {
+  SetConfig(paypal) {
     const config = {
       host: "api.sandbox.paypal.com",
       port: "",
@@ -7,5 +7,6 @@
       client_secret: process.env.PAYPAL_SECRET,
     };
     paypal.configure(config);
-  };
-})(module.exports);
+  }
+}
+export default new PayPalConfig();
