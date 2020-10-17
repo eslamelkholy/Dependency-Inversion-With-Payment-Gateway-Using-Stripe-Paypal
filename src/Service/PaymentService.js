@@ -2,7 +2,8 @@ import db from "../models";
 
 class PaymentService {
   async addNewCharge(payment) {
-    await db.payment.create(payment);
+    const { amount, id: chargeId } = payment;
+    await db.payment.create({ amount, chargeId });
   }
 }
 

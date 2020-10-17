@@ -1,5 +1,5 @@
 require("dotenv").config();
-export const development = {
+const development = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
@@ -11,7 +11,7 @@ export const development = {
     session: false,
   },
 };
-export const test = {
+const test = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
@@ -23,7 +23,7 @@ export const test = {
     session: false,
   },
 };
-export const production = {
+const production = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
@@ -34,4 +34,10 @@ export const production = {
   jwtSession: {
     session: false,
   },
+};
+
+module.exports = {
+  development,
+  test,
+  production,
 };
