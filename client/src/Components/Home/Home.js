@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../../Api/Axios/AxiosInstance";
+import PaymentService from "../../Api/Payment/PaymentService";
 
 const Home = (props) => {
   const [payment, setPayment] = useState({
@@ -10,7 +10,7 @@ const Home = (props) => {
 
   const submitPayment = async (e) => {
     e.preventDefault();
-    const result = await axiosInstance.get("/payment");
+    const result = await PaymentService.addPayment();
     console.log(result);
   };
   return (

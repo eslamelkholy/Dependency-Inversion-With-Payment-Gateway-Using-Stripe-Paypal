@@ -1,3 +1,5 @@
 import AxiosInstance from "../Axios/AxiosInstance";
 
-export default {};
+const addPayment = async () => await AxiosInstance.post("/payment/paypal");
+
+export default { addPayment };

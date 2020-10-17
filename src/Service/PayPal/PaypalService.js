@@ -1,15 +1,18 @@
 import paypal from "paypal-rest-sdk";
 import "./PayPalConfig";
-import { create_payment_json } from "./mockPayment";
 
 class PayPalService {
-  createCharge() {
-    paypal.payment.create(create_payment_json, function (error, payment) {
-      if (error) throw error;
-      else {
-        console.log("Create Payment Response");
-        console.log(payment);
-      }
+  createCharge(paymentObject) {
+    return new Promise(function (resolve, reject) {
+      paypal.payment.create(paymentObject, function (error, payment) {
+        if (error) reject(error);
+        else {
+          const { links } = payment;
+          for (let i = 0; i < links.length; i++) {
+            if (links[i].rel === "approval_url") resolve(links[i].href);
+          }
+        }
+      });
     });
   }
 }
