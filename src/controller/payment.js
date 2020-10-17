@@ -3,6 +3,7 @@ import PayPalService from "../Service/PayPal/PaypalService";
 import PaymentService from "../Service/PaymentService";
 import { SUCCESS_MESSAGE } from "../utils/Payment";
 import { create_payment_json } from "../Service/PayPal/mockPayment";
+import PaypalService from "../Service/PayPal/PaypalService";
 
 const get = async (req, res) => {
   return res.status(200).send("Customer Charges =====");
@@ -22,7 +23,8 @@ const post = async (req, res) => {
 };
 
 const paypal = async (req, res) => {
-  const redirectLink = await PayPalService.createCharge(create_payment_json);
+  const payment = await PayPalService.createCharge(create_payment_json);
+  const redirectLink = PaypalService.getRedirectLink(payment.links);
   return res.status(200).send({ redirectLink });
 };
 
