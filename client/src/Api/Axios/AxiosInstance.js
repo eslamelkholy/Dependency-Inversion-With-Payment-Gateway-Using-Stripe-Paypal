@@ -1,12 +1,13 @@
 import axios from "axios";
+
+const END_POINT = "http://localhost:3000";
+
 const axiosInstance = axios.create({
-  // TODO: User Environment Variables for Our End Points Later
-  baseURL: "http://localhost:3000" + "/",
+  baseURL: END_POINT + "/",
 });
 
 axiosInstance.interceptors.request.use((cfg) => {
   cfg.headers["Accept"] = "application/json";
-  cfg.headers["Authorization"] = `auth ${localStorage.getItem("user-auth")}`;
   return cfg;
 });
 
