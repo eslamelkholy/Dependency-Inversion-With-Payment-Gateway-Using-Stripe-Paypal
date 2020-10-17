@@ -3,7 +3,7 @@ import "./PayPalConfig";
 import { create_payment_json } from "./mockPayment";
 
 class PayPalService {
-  async createCharge() {
+  createCharge() {
     paypal.payment.create(create_payment_json, function (error, payment) {
       if (error) throw error;
       else {

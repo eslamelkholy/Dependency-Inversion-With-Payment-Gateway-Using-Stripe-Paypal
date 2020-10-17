@@ -1,4 +1,5 @@
 import StripeService from "../Service/StripeService";
+import PayPalService from "../Service/PayPal/PaypalService";
 import PaymentService from "../Service/PaymentService";
 import { SUCCESS_MESSAGE } from "../utils/Payment";
 
@@ -19,7 +20,13 @@ const post = async (req, res) => {
   return res.status(200).send({ charged: true, message: SUCCESS_MESSAGE });
 };
 
+const paypal = (req, res) => {
+  PayPalService.createCharge();
+  return res.status(200).send("Successfully");
+};
+
 export default {
   get,
   post,
+  paypal,
 };

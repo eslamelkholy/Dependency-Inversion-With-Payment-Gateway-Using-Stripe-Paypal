@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const END_POINT = "http://localhost:3000";
+const END_POINT = "http://localhost:3001";
 
 const axiosInstance = axios.create({
   baseURL: END_POINT + "/",
