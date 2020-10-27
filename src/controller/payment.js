@@ -5,10 +5,6 @@ import { SUCCESS_MESSAGE } from "../utils/Payment";
 import { create_payment_json, execute_payment_json } from "../Service/PayPal/mockPayment";
 import PaypalService from "../Service/PayPal/PaypalService";
 
-const get = async (req, res) => {
-  return res.status(200).send("Customer Charges =====");
-};
-
 /**
  * @param {chargeData: {amount, currency, description, source: 'tok_visa' For Test}} req
  * @param {charged: Boolean, message: String} res
@@ -26,12 +22,16 @@ const post = async (req, res) => {
  * @param {paymentObject} req
  * @param {redirectLink: String} res
  */
+
 const paypal = async (req, res) => {
   const payment = await PayPalService.createCharge(create_payment_json);
   const redirectLink = PaypalService.getRedirectLink(payment.links);
   return res.status(200).send({ redirectLink });
 };
 
+/**
+ * Success Page After The Payment Finished Successfully
+ */
 const successPage = (req, res) => {
   const { PayerID, paymentId } = req.query;
   const payment_object = execute_payment_json(PayerID);
@@ -48,7 +48,6 @@ const successPage = (req, res) => {
 };
 
 export default {
-  get,
   post,
   paypal,
   successPage,
