@@ -6,7 +6,7 @@ export const create_payment_json = {
     payment_method: "paypal",
   },
   redirect_urls: {
-    return_url: "http://localhost:3000/sucess",
+    return_url: "http://localhost:3000/payment/sucess",
     cancel_url: "http://localhost:3000/cancel",
   },
   transactions: [

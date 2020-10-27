@@ -32,19 +32,12 @@ const paypal = async (req, res) => {
 /**
  * Success Page After The Payment Finished Successfully
  */
-const successPage = (req, res) => {
+const successPage = async (req, res) => {
   const { PayerID, paymentId } = req.query;
   const payment_object = execute_payment_json(PayerID);
-  paypal.payment.execute(paymentId, payment_object, function (error, payment) {
-    if (error) {
-      console.log(error.response);
-      throw error;
-    } else {
-      console.log("Get Payment Response");
-      console.log(JSON.stringify(payment));
-      res.send("Payment Success");
-    }
-  });
+  const payment = await PaypalService.paymentExecution(payment_object, paymentId);
+  await PaypalService.addNewCharge(payment);
+  return res.status(200).send("Success");
 };
 
 export default {

@@ -4,6 +4,6 @@ const paymentRouter = express.Router();
 
 paymentRouter.post("/", payment.post);
 paymentRouter.post("/paypal", payment.paypal);
-paymentRouter.get("/success", payment.successPage);
+paymentRouter.get("/sucess", payment.successPage);
 
 export default paymentRouter;
