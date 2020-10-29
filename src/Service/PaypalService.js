@@ -1,5 +1,5 @@
 import paypal from "paypal-rest-sdk";
-import "./PayPalConfig";
+import "./PayPal/PayPalConfig";
 
 class PayPalService {
   createCharge(paymentObject) {
@@ -17,7 +17,7 @@ class PayPalService {
         if (error) reject(error);
         else {
           const { id, transactions } = payment;
-          resolve({ id, amount: transactions[0].amount.total });
+          resolve({ id, amount: parseInt(transactions[0].amount.total) });
         }
       });
     });

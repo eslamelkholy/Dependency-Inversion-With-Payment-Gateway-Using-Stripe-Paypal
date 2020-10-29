@@ -1,9 +1,9 @@
 import StripeService from "../Service/StripeService";
-import PayPalService from "../Service/PayPal/PaypalService";
+import PayPalService from "../Service/PaypalService";
 import PaymentService from "../Service/PaymentService";
 import { SUCCESS_MESSAGE } from "../utils/Payment";
 import { create_payment_json, execute_payment_json } from "../Service/PayPal/mockPayment";
-import PaypalService from "../Service/PayPal/PaypalService";
+import PaypalService from "../Service/PaypalService";
 
 /**
  * @param {chargeData: {amount, currency, description, source: 'tok_visa' For Test}} req
@@ -36,7 +36,7 @@ const successPage = async (req, res) => {
   const { PayerID, paymentId } = req.query;
   const payment_object = execute_payment_json(PayerID);
   const payment = await PaypalService.paymentExecution(payment_object, paymentId);
-  await PaypalService.addNewCharge(payment);
+  await PaymentService.addNewCharge(payment);
   return res.status(200).send("Success");
 };
 
