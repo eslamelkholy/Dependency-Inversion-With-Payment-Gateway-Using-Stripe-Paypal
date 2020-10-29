@@ -1,10 +1,12 @@
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-class StripeService {
+class StripeServiceWrapper {
+  constructor() {
+    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  }
   async createCharge(chargeData) {
     const { amount, currency, description, source } = chargeData;
-    const charge = await stripe.charges.create({
+    const charge = await this.stripe.charges.create({
       amount,
       currency,
       description,
@@ -26,4 +28,4 @@ class StripeService {
   }
 }
 
-export default new StripeService();
+export default StripeServiceWrapper;

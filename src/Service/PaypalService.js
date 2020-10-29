@@ -1,17 +1,8 @@
 import paypal from "paypal-rest-sdk";
 import "./PayPal/PayPalConfig";
 
-class PayPalService {
-  createCharge(paymentObject) {
-    return new Promise(function (resolve, reject) {
-      paypal.payment.create(paymentObject, function (error, payment) {
-        if (error) reject(error);
-        else resolve(payment);
-      });
-    });
-  }
-
-  paymentExecution(payment_object, paymentId) {
+class PayPalServiceWrapper {
+  createCharge({ payment_object, paymentId }) {
     return new Promise(function (resolve, reject) {
       paypal.payment.execute(paymentId, payment_object, function (error, payment) {
         if (error) reject(error);
@@ -23,6 +14,15 @@ class PayPalService {
     });
   }
 
+  paymentExecutionLink(paymentObject) {
+    return new Promise(function (resolve, reject) {
+      paypal.payment.create(paymentObject, function (error, payment) {
+        if (error) reject(error);
+        else resolve(payment);
+      });
+    });
+  }
+
   getRedirectLink(links) {
     for (let i = 0; i < links.length; i++) {
       if (links[i].rel === "approval_url") return links[i].href;
@@ -30,4 +30,4 @@ class PayPalService {
   }
 }
 
-export default new PayPalService();
+export default PayPalServiceWrapper;
