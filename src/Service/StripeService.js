@@ -1,11 +1,11 @@
 import Stripe from "stripe";
-
+import mockPayment from "./Stripe/mockPayment";
 class StripeServiceWrapper {
   constructor() {
     this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   }
-  async createCharge(chargeData) {
-    const { amount, currency, description, source } = chargeData;
+  async createCharge() {
+    const { amount, currency, description, source } = mockPayment;
     const charge = await this.stripe.charges.create({
       amount,
       currency,

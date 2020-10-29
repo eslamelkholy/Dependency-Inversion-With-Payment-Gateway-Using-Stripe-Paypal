@@ -9,9 +9,8 @@ import PaymentStore from "../Service/PaymentStore";
  */
 
 const post = async (req, res) => {
-  const { chargeData } = req.body;
   const store = new PaymentStore(new StripeServiceWrapper());
-  await store.makeTransaction(chargeData);
+  await store.makeTransaction();
   return res.status(200).send({ charged: true, message: SUCCESS_MESSAGE });
 };
 
