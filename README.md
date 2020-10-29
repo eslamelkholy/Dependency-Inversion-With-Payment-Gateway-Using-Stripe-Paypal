@@ -23,3 +23,12 @@ And How To Use it in Real Case Senario
 - e.g StripeServiceWrapper, PaypalServiceWrapper
 - So We Just Abstract the Payment Gateways Idea Using These Wrappers it's
 - Our Code Now Depends On These Wrappers Not The Actual Implementation Of Dependency We're Using
+
+## How To Start
+- npm install
+- Make Account At Stripe https://dashboard.stripe.com/login 
+- Set Environment Variables at .env STRIPE_PUBLISH_KEY & STRIPE_SECRET_KEY
+- Signup at Paypal https://developer.paypal.com/developer/accounts/
+- Set Environment Variables at .env PAYPAL_CLIENT_ID & PAYPAL_SECRET
+- Hit Stripe End Point http://localhost:3000/payment/ With Empty Post Request 
+- Hit http://localhost:3000/payment/paypal With Empty Post Request
