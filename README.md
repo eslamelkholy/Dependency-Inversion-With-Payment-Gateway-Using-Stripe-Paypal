@@ -24,6 +24,109 @@ And How To Use it in Real Case Senario You Can More Details at my Article Here <
 - e.g StripeServiceWrapper, PaypalServiceWrapper
 - So We Just Abstract the Payment Gateways Idea Using These Wrappers it's
 - Our Code Now Depends On These Wrappers Not The Actual Implementation Of Dependency We're Using
+# Let's Start By Some Code Snippets
+**Payment Store**
+Here We Are Going to Inject The Wrapper And Makes The Transaction With Anyone We Want Easily
+
+```javascript
+import PaymentService from "./PaymentService";
+class PaymentStore {
+  constructor(paymentWrapper) {
+    this.paymentWrapper = paymentWrapper;
+    this.paymentService = new PaymentService();
+  }
+
+  async makeTransaction(chargeData) {
+    const charge = await this.paymentWrapper.createCharge(chargeData);
+    await this.paymentService.addNewCharge(charge);
+    return charge;
+  }
+}
+
+export default PaymentStore;
+```
+
+**Stripe Wrapper**
+```javascript
+import Stripe from "stripe";
+import mockPayment from "./Stripe/mockPayment";
+class StripeServiceWrapper {
+  constructor() {
+    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  }
+  async createCharge() {
+    const { amount, currency, description, source } = mockPayment;
+    const charge = await this.stripe.charges.create({
+      amount,
+      currency,
+      description,
+      source,
+    });
+    return charge;
+  }
+
+  async createCustomer(customerData) {
+    const { name, email, source, address, phone } = customerData;
+    const customer = await stripe.customers.create({
+      address,
+      name,
+      email,
+      phone,
+      source,
+    });
+    return customer;
+  }
+}
+
+export default StripeServiceWrapper;
+```
+
+**Paypal Wrapper** 
+
+```javascript
+import paypal from "paypal-rest-sdk";
+import "./PayPal/PayPalConfig";
+
+class PayPalServiceWrapper {
+  createCharge({ payment_object, paymentId }) {
+    return new Promise(function (resolve, reject) {
+      paypal.payment.execute(paymentId, payment_object, function (error, payment) {
+        if (error) reject(error);
+        else {
+          const { id, transactions } = payment;
+          resolve({ id, amount: parseInt(transactions[0].amount.total) });
+        }
+      });
+    });
+  }
+
+  paymentExecutionLink(paymentObject) {
+    return new Promise(function (resolve, reject) {
+      paypal.payment.create(paymentObject, function (error, payment) {
+        if (error) reject(error);
+        else resolve(payment);
+      });
+    });
+  }
+
+  getRedirectLink(links) {
+    for (let i = 0; i < links.length; i++) {
+      if (links[i].rel === "approval_url") return links[i].href;
+    }
+  }
+}
+
+export default PayPalServiceWrapper;
+```
+##### So Now At Our Controller It's Going to Be Very Easy To Switch From Stripe To Paypal
+
+```javascript
+const post = async (req, res) => {
+  const store = new PaymentStore(new StripeServiceWrapper());
+  await store.makeTransaction();
+  return res.status(200).send({SUCCESS_MESSAGE});
+};
+```
 
 ## How To Start
 - npm install
